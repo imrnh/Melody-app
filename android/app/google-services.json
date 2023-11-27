@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "556121620278",
+    "firebase_url": "https://elite-group-chat-default-rtdb.firebaseio.com",
+    "project_id": "elite-group-chat",
+    "storage_bucket": "elite-group-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556121620278:android:a8cf9f5f5c6ec60baefd97",
+        "android_client_info": {
+          "package_name": "com.example.check_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556121620278-qcdhv8krtokhtadid2kr8t6er7fkq5vt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxynIQedGUttwWufwNwsQvWXKldhsoUxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556121620278-qcdhv8krtokhtadid2kr8t6er7fkq5vt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "556121620278-4b5p7g72ad5uk7ejr0f5sla6vjaao1i6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.twilite"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556121620278:android:bb0158f49e089ae6aefd97",
+        "android_client_info": {
+          "package_name": "com.example.twilite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556121620278-qcdhv8krtokhtadid2kr8t6er7fkq5vt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxynIQedGUttwWufwNwsQvWXKldhsoUxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556121620278-qcdhv8krtokhtadid2kr8t6er7fkq5vt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "556121620278-4b5p7g72ad5uk7ejr0f5sla6vjaao1i6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.twilite"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
