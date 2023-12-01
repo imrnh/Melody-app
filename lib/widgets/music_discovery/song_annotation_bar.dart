@@ -18,7 +18,7 @@ Widget getSongAnnotationBar(dynamic context, String annotation) {
 
             SizedBox(
               width: containerWidth,
-              child: Text("${annotation.substring(0, 129)}... more",
+              child: Text("",
                 style: GoogleFonts.inter(
                   fontSize: 9
                 ),

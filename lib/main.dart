@@ -42,8 +42,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/discover", //ChatPage(myUID: "2343", frUID: "4009viodsf"),
-      getPages: pageMapping(),
+      // initialRoute: "/discover", //ChatPage(myUID: "2343", frUID: "4009viodsf"),
+      // getPages: pageMapping(),
+      home: AuthScreen(),
     );
   }
 }

@@ -63,7 +63,7 @@
     },
     {
       "name": "collection",
-      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/collection-1.17.2",
+      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/collection-1.18.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -197,7 +197,13 @@
       "name": "flutter",
       "rootUri": "file:///home/imran/Apps/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "flutter_animate",
+      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/flutter_animate-4.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "flutter_chat_types",
@@ -257,7 +263,7 @@
       "name": "flutter_test",
       "rootUri": "file:///home/imran/Apps/flutter/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "flutter_web_auth_2",
@@ -275,7 +281,7 @@
       "name": "flutter_web_plugins",
       "rootUri": "file:///home/imran/Apps/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "get",
@@ -399,7 +405,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/meta-1.9.1",
+      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/meta-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -569,7 +575,7 @@
       "name": "sky_engine",
       "rootUri": "file:///home/imran/Apps/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "source_span",
@@ -579,15 +585,15 @@
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
+      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
+      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/stream_channel-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "string_scanner",
@@ -609,9 +615,9 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/test_api-0.6.0",
+      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/test_api-0.6.1",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.0"
     },
     {
       "name": "typed_data",
@@ -705,9 +711,9 @@
     },
     {
       "name": "web",
-      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/web-0.1.4-beta",
+      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/web-0.3.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "web_socket_channel",
@@ -752,7 +758,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-11-23T06:15:07.781332Z",
+  "generated": "2023-11-28T05:03:14.841510Z",
   "generator": "pub",
-  "generatorVersion": "3.1.5"
+  "generatorVersion": "3.2.1"
 }

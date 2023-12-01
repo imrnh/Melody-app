@@ -13,7 +13,7 @@ Widget getDiscoveredMusicCoverWidget(
     height: contentHeight,
     child: Stack(
       children: [
-        Image.asset(
+        Image.network(
           imagePath,
           width: contentWidth,
           height: contentHeight,

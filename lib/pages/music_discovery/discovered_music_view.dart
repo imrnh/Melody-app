@@ -40,9 +40,9 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
   Widget build(BuildContext context) {
     //fetch this data from api.
 
-    String songAnnotation =
-        "In publishing and graphic design, Lorem ipsum is a placeholder commonly used to demonstrate the visual form of a document or text";
-    String playUrl = "https://youtu.be/-gA3H3clEqk";
+    String songAnnotation = "";
+    String playUrl =reognized_songs[0]['playback_url'];
+    String cover_image = reognized_songs[0]['cover_image'];
 
     return SafeArea(
       child: Scaffold(
@@ -52,7 +52,7 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
             Stack(
               children: [
                 getDiscoveredMusicCoverWidget(
-                    context, "assets/images/cover.jpg", songTitle, songArtist),
+                    context, cover_image, songTitle, songArtist),
                 getTransparentTopBar(lyricsViewPressed),
               ],
             ),
@@ -79,27 +79,27 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
             const SizedBox(
               height: 50,
             ),
-            possibleSimilarDiscoveriesCard(
-                context,
-                "assets/images/song_2.jpg",
-                reognized_songs[1].split(" - ")[0],
-                reognized_songs[1].split(" - ")[1].split(".")[0],
-                "https://youtu.be/ng74uaBTC4s"),
-            const SizedBox(height: 34),
-            possibleSimilarDiscoveriesCard(
-                context,
-                "assets/images/song_1.jpg",
-                reognized_songs[2].split(" - ")[0],
-                reognized_songs[2].split(" - ")[1].split(".")[0],
-                "https://youtu.be/ng74uaBTC4s"),
-            const SizedBox(height: 34),
-            possibleSimilarDiscoveriesCard(
-                context,
-                "assets/images/song_3.jpg",
-                reognized_songs[3].split(" - ")[0],
-                reognized_songs[3].split(" - ")[1].split(".")[0],
-                "https://youtu.be/G8SKzENt8Is"),
-            const SizedBox(height: 100),
+            // possibleSimilarDiscoveriesCard(
+            //     context,
+            //     "assets/images/song_2.jpg",
+            //     reognized_songs[1].split(" - ")[0],
+            //     reognized_songs[1].split(" - ")[1].split(".")[0],
+            //     "https://youtu.be/ng74uaBTC4s"),
+            // const SizedBox(height: 34),
+            // possibleSimilarDiscoveriesCard(
+            //     context,
+            //     "assets/images/song_1.jpg",
+            //     reognized_songs[2].split(" - ")[0],
+            //     reognized_songs[2].split(" - ")[1].split(".")[0],
+            //     "https://youtu.be/ng74uaBTC4s"),
+            // const SizedBox(height: 34),
+            // possibleSimilarDiscoveriesCard(
+            //     context,
+            //     "assets/images/song_3.jpg",
+            //     reognized_songs[3].split(" - ")[0],
+            //     reognized_songs[3].split(" - ")[1].split(".")[0],
+            //     "https://youtu.be/G8SKzENt8Is"),
+            // const SizedBox(height: 100),
           ],
         ),
       ),
