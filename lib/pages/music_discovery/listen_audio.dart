@@ -12,7 +12,6 @@ import 'package:twilite/pages/music_discovery/discovered_music_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-
 String randomString() {
   final random = Random.secure();
   final values = List<int>.generate(16, (i) => random.nextInt(255));
@@ -51,7 +50,7 @@ class _ListenMusicPageState extends State<ListenMusicPage>
   }
 
   void searchWithLyrics() async {
-    String url = root_url +  'lyrics/search';
+    String url = root_url + 'lyrics/search';
     String textToSend = editingController.text;
     try {
       String? user_id = FirebaseAuth.instance.currentUser?.uid;
