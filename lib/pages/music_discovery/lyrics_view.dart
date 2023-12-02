@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:twilite/api/sample_lyrics.dart';
-import 'package:twilite/widgets/music_discovery/cover_image_with_wrapper.dart';
-import 'package:twilite/widgets/music_discovery/lyrics_view_line_by_line.dart';
-import 'package:twilite/widgets/music_discovery/play_music_button.dart';
-import 'package:twilite/widgets/music_discovery/possible_similarities_card.dart';
-import 'package:twilite/widgets/music_discovery/song_annotation_bar.dart';
-import 'package:twilite/widgets/topbars.dart';
+import 'package:Melody/api/sample_lyrics.dart';
+import 'package:Melody/widgets/music_discovery/cover_image_with_wrapper.dart';
+import 'package:Melody/widgets/music_discovery/lyrics_view_line_by_line.dart';
+import 'package:Melody/widgets/music_discovery/play_music_button.dart';
+import 'package:Melody/widgets/music_discovery/possible_similarities_card.dart';
+import 'package:Melody/widgets/music_discovery/song_annotation_bar.dart';
+import 'package:Melody/widgets/topbars.dart';
 
 class LyricsViewPage extends StatefulWidget {
   final String songName, songArtist, lyricsText, song_id;

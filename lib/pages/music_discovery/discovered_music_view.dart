@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:twilite/widgets/music_discovery/cover_image_with_wrapper.dart';
-import 'package:twilite/widgets/music_discovery/play_music_button.dart';
-import 'package:twilite/widgets/music_discovery/possible_similarities_card.dart';
-import 'package:twilite/widgets/music_discovery/song_annotation_bar.dart';
-import 'package:twilite/widgets/topbars.dart';
+import 'package:Melody/widgets/music_discovery/cover_image_with_wrapper.dart';
+import 'package:Melody/widgets/music_discovery/play_music_button.dart';
+import 'package:Melody/widgets/music_discovery/possible_similarities_card.dart';
+import 'package:Melody/widgets/music_discovery/song_annotation_bar.dart';
+import 'package:Melody/widgets/topbars.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -19,7 +19,6 @@ class DiscoveredMusicViewPage extends StatefulWidget {
 
 class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
   void lyricsViewPressed() {
-    print("Do something to change the screen to view the lyrics.");
   }
 
   Future<void> fetchLyrics(int song_id, Map<String, String> songInfo) async {
@@ -62,7 +61,7 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
     Map<String, String> songInfoForLyricsView = {
       'name':  reognized_songs[0]['mname'],
       'artist':  reognized_songs[0]["artist_name"],
-      'id':  reognized_songs[0]['id'],
+      'id':  reognized_songs[0]['id'].toString(),
     };
 
     return SafeArea(

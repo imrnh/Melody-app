@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:twilite/auth_home.dart';
-import 'package:twilite/pages/friends/inbox.dart';
-import 'package:twilite/pages/homepage.dart';
-import 'package:twilite/pages/music_discovery/listen_audio.dart';
+import 'package:Melody/auth_home.dart';
+import 'package:Melody/pages/friends/inbox.dart';
+import 'package:Melody/pages/homepage.dart';
+import 'package:Melody/pages/music_discovery/listen_audio.dart';
 
 List<GetPage<dynamic>> pageMapping() {
   return [

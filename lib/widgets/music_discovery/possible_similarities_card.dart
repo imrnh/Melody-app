@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:twilite/widgets/music_discovery/play_music_button.dart';
+import 'package:Melody/widgets/music_discovery/play_music_button.dart';
 
 Widget possibleSimilarDiscoveriesCard(BuildContext context, String imgPath,
     String songName, String songArtist, String playUrl) {
@@ -8,8 +8,6 @@ Widget possibleSimilarDiscoveriesCard(BuildContext context, String imgPath,
 
   double contentWidth = displayWidth * 0.85;
   double contentHeight = 95.0;
-
-
 
   return Padding(
     padding: const EdgeInsets.fromLTRB(43, 0, 0, 0),

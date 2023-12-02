@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:twilite/api/SongsModel.dart';
-import 'package:twilite/widgets/music_discovery/possible_similarities_card.dart';
+import 'package:Melody/api/SongsModel.dart';
+import 'package:Melody/widgets/music_discovery/possible_similarities_card.dart';
 
 class HistoryViewPage extends StatelessWidget {
   final List<dynamic> userHistory;

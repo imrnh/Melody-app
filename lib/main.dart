@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:twilite/api/sample_lyrics.dart';
-import 'package:twilite/auth_home.dart';
-import 'package:twilite/navigations.dart';
-import 'package:twilite/pages/friends/old_chat.dart';
-import 'package:twilite/pages/homepage.dart';
-import 'package:twilite/pages/music_discovery/discovered_music_view.dart';
-import 'package:twilite/pages/music_discovery/listen_audio.dart';
-import 'package:twilite/pages/music_discovery/lyrics_view.dart';
-import 'package:twilite/widgets/appbar.dart';
+import 'package:Melody/api/sample_lyrics.dart';
+import 'package:Melody/auth_home.dart';
+import 'package:Melody/navigations.dart';
+import 'package:Melody/pages/friends/old_chat.dart';
+import 'package:Melody/pages/homepage.dart';
+import 'package:Melody/pages/music_discovery/discovered_music_view.dart';
+import 'package:Melody/pages/music_discovery/listen_audio.dart';
+import 'package:Melody/pages/music_discovery/lyrics_view.dart';
+import 'package:Melody/widgets/appbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -44,7 +44,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: "/discover", //ChatPage(myUID: "2343", frUID: "4009viodsf"),
       // getPages: pageMapping(),
-      home: FirebaseAuth.instance.currentUser != null ? ListenMusicPage() : AuthScreen(),
+      home: FirebaseAuth.instance.currentUser != null
+          ? ListenMusicPage()
+          : AuthScreen(),
     );
   }
 }

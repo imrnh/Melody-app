@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:palette_generator/palette_generator.dart';
 
 Widget getDiscoveredMusicCoverWidget(
     dynamic context, String imagePath, String songTitle, String songArtist) {
@@ -8,20 +7,6 @@ Widget getDiscoveredMusicCoverWidget(
 
   dynamic contentWidth = MediaQuery.of(context).size.width;
   dynamic contentHeight = MediaQuery.of(context).size.height * 0.7;
-
-  PaletteGenerator? paletteGenerator;
-
-  Future<void> _updatePaletteGenerator(Rect? newRegion) async {
-    paletteGenerator = await PaletteGenerator.fromImageProvider(
-      NetworkImage(imagePath),
-      region: newRegion,
-      maximumColorCount: 20,
-    );
-  }
-
-  Iterable<Color>? retrieved_colors = paletteGenerator?.colors;
-
-  print("Colors $retrieved_colors");
 
   return SizedBox(
     width: contentWidth,

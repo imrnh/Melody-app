@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:twilite/pages/music_discovery/listen_audio.dart';
+import 'package:Melody/pages/music_discovery/listen_audio.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -27,7 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-      Get.to(()=>ListenMusicPage());
+      Get.to(() => ListenMusicPage());
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
       print("@MESSAGE _ ERROR $e");
@@ -69,12 +69,19 @@ class _AuthScreenState extends State<AuthScreen> {
               alignment: Alignment.center,
               children: [
                 Positioned(
-                  left: MediaQuery.of(context).size.width * .33,
+                    left: MediaQuery.of(context).size.width * .33,
                     top: 100,
                     child: Text("Melody",
-                        style: GoogleFonts.aBeeZee(textStyle: const TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: Colors.brown)))),
+                        style: GoogleFonts.aBeeZee(
+                            textStyle: const TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.brown)))),
                 Center(
-                  child:  Image(image: AssetImage("assets/images/music-notes.png"), width: 250,),
+                  child: Image(
+                    image: AssetImage("assets/images/music-notes.png"),
+                    width: 250,
+                  ),
                 ),
                 Positioned(
                     bottom: 120,
@@ -83,11 +90,18 @@ class _AuthScreenState extends State<AuthScreen> {
                       height: 45,
                       child: ElevatedButton.icon(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.brown),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.brown),
                         ),
                         onPressed: signInWithGoogle,
-                        icon: const Icon(Icons.g_mobiledata_rounded, color: Colors.white,),
-                        label: const Text("Sign in with Google", style: TextStyle(color: Colors.white),),
+                        icon: const Icon(
+                          Icons.g_mobiledata_rounded,
+                          color: Colors.white,
+                        ),
+                        label: const Text(
+                          "Sign in with Google",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ))
               ],
