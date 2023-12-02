@@ -5,6 +5,8 @@ import 'package:twilite/widgets/music_discovery/play_music_button.dart';
 import 'package:twilite/widgets/music_discovery/possible_similarities_card.dart';
 import 'package:twilite/widgets/music_discovery/song_annotation_bar.dart';
 import 'package:twilite/widgets/topbars.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class DiscoveredMusicViewPage extends StatefulWidget {
   final List<dynamic> songs;
@@ -20,8 +22,26 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
     print("Do something to change the screen to view the lyrics.");
   }
 
-  String songTitle = "";
-  String songArtist = "";
+  Future<void> fetchLyrics(int song_id, Map<String, String> songInfo) async {
+
+
+    const String apiUrl = 'https://advanced-sheepdog-awaited.ngrok-free.app/lyrics/get_lyrics'; // Replace with your API endpoint
+    final Map<String, String> queryParams = {
+      'song_id': song_id.toString(),
+    };
+
+    final Uri uri = Uri.parse(apiUrl).replace(queryParameters: queryParams);
+
+    try {
+      final response = await http.get(uri);
+      final data = json.decode(response.body);
+      print('Response data: $data');
+    } catch (error) {
+      // Handle exceptions
+      print('Exception: $error');
+    }
+  }
+
   List<dynamic> reognized_songs = [];
 
   @override
@@ -33,9 +53,17 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
   @override
   Widget build(BuildContext context) {
 
-    String songAnnotation = "";
     String playUrl =reognized_songs[0]['playback_url'];
     String cover_image = reognized_songs[0]['cover_image'];
+
+    String songTitle = reognized_songs[0]['mname'];
+    String songArtist = reognized_songs[0]['artist_name'];
+
+    Map<String, String> songInfoForLyricsView = {
+      'name':  reognized_songs[0]['mname'],
+      'artist':  reognized_songs[0]["artist_name"],
+      'id':  reognized_songs[0]['id'],
+    };
 
     return SafeArea(
       child: Scaffold(
@@ -47,14 +75,12 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
               children: [
                 getDiscoveredMusicCoverWidget(
                     context, cover_image, songTitle, songArtist),
-                getTransparentTopBar(lyricsViewPressed),
+                getTransparentTopBar(fetchLyrics, reognized_songs[0]['id'] ?? 0, songInfoForLyricsView),
               ],
             ),
             const SizedBox(
-              height: 10,
+              height: 35,
             ),
-            getSongAnnotationBar(context, songAnnotation),
-            const SizedBox(height: 70),
             playSongButton(
                 context,
                 playUrl,
@@ -77,7 +103,7 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: ClampingScrollPhysics(),
-                itemCount: reognized_songs.length,
+                itemCount: reognized_songs.length - 1,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
@@ -87,11 +113,13 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
                         reognized_songs[index + 1]['mname'],
                         reognized_songs[index + 1]['artist_name'], reognized_songs[index + 1]['playback_url']
                       ),
+                      const SizedBox(height: 30,)
                     ],
                   );
                 },
               ),
             ),
+            const SizedBox(height: 50),
           ],
         ),
       ),

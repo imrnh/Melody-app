@@ -9,18 +9,14 @@ import 'package:twilite/widgets/music_discovery/song_annotation_bar.dart';
 import 'package:twilite/widgets/topbars.dart';
 
 class LyricsViewPage extends StatefulWidget {
-  final Color gradientBeingColor;
-  final Color gradientEndColor;
-  final String songName, songArtist, lyricsText, songUUID;
+  final String songName, songArtist, lyricsText, song_id;
 
   const LyricsViewPage(
       {super.key,
       required this.songName,
       required this.songArtist,
       required this.lyricsText,
-      required this.songUUID,
-      required this.gradientBeingColor,
-      required this.gradientEndColor});
+      required this.song_id});
 
   @override
   State<LyricsViewPage> createState() => _LyricsViewPageState();
@@ -39,7 +35,7 @@ class _LyricsViewPageState extends State<LyricsViewPage> {
   }
 
   void annotationWindowLaunch(int lineIndex) {
-    print("-----------Trying annotation for $lineIndex");
+    // print("-----------Trying annotation for $lineIndex");
   }
 
   @override
@@ -47,13 +43,6 @@ class _LyricsViewPageState extends State<LyricsViewPage> {
     return SafeArea(
         child: Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [widget.gradientBeingColor, widget.gradientEndColor],
-          begin: Alignment.topCenter, // Start from the top center
-          end: Alignment.bottomCenter, // End at the bottom center
-          stops: const [0.0, 0.9],
-        )),
         child: ListView(
           children: [
             getTransparentTopBarWithBackButtonOnly(),

@@ -74,8 +74,7 @@ class _ListenMusicPageState extends State<ListenMusicPage>
   }
 
   void uploadFile() async {
-    final String api_url = "${root_url}audio/identify";
-    print("\n\n\n\n\n\n\n\n@@@@@API URL IS: ${api_url}");
+    final String api_url = "${root_url}audio/identify/";
     final directory = await getApplicationDocumentsDirectory();
     File file = File('${directory.path}/$audioFilename.m4a');
     String? user_id = FirebaseAuth.instance.currentUser?.uid;
@@ -121,7 +120,9 @@ class _ListenMusicPageState extends State<ListenMusicPage>
   }
 
   Future<void> fetchUserHistory(String userId) async {
-    final url = '${root_url}view_history/';
+    final url = '${root_url}audio/view_history/';
+
+    print("@@REQUEST URL: ${url}");
 
     try {
       final response = await http.post(
@@ -134,6 +135,7 @@ class _ListenMusicPageState extends State<ListenMusicPage>
 
       List<dynamic> fetchedSongs = [];
       if(responseData != null){
+        print("RESPONSE: ${responseData['songs']}");
         fetchedSongs = responseData['songs'];
       }
       Get.to(()=>HistoryViewPage(userHistory: fetchedSongs));

@@ -9,13 +9,11 @@ class HistoryViewPage extends StatelessWidget {
   final List<dynamic> userHistory;
   HistoryViewPage({super.key, required this.userHistory});
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color.fromRGBO(235, 235, 235, 1),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -23,11 +21,11 @@ class HistoryViewPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
-                "History",
+                "Library",
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 33,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ),
@@ -41,10 +39,10 @@ class HistoryViewPage extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 10),
                     child: possibleSimilarDiscoveriesCard(
                       context,
-                      userHistory[index][''], //cover
-                      userHistory[index][0], //title
-                      userHistory[index][1], //artist
-                      userHistory[index][3], //playbackurl
+                      userHistory[index]['cover_image'], //cover
+                      userHistory[index]['mname'], //title
+                      userHistory[index]['artist_name'], //artist
+                      userHistory[index]['playback_url'], //playbackurl
                     ),
                   );
                 },

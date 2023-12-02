@@ -434,6 +434,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "palette_generator",
+      "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/palette_generator-0.3.3+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "path",
       "rootUri": "file:///home/imran/.pub-cache/hosted/pub.dev/path-1.8.3",
       "packageUri": "lib/",
@@ -758,7 +764,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-12-01T16:07:23.466Z",
+  "generated": "2023-12-02T13:45:31.102958Z",
   "generator": "pub",
   "generatorVersion": "3.2.1"
 }
