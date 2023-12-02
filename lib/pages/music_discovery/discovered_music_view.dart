@@ -22,7 +22,7 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
 
   String songTitle = "";
   String songArtist = "";
-  List<dynamic> reognized_songs = ["", "", "", ""];
+  List<dynamic> reognized_songs = [];
 
   @override
   void initState() {
@@ -30,10 +30,8 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
     super.initState();
       reognized_songs = widget.songs;
   }
-
   @override
   Widget build(BuildContext context) {
-    //fetch this data from api.
 
     String songAnnotation = "";
     String playUrl =reognized_songs[0]['playback_url'];
@@ -42,7 +40,8 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
+        body: ListView(
+
           children: [
             Stack(
               children: [
@@ -74,20 +73,24 @@ class _DiscoveredMusicViewPageState extends State<DiscoveredMusicViewPage> {
             const SizedBox(
               height: 50,
             ),
-            Expanded(
-              child: ListView.builder(itemBuilder: (BuildContext context, int index){
-                return Column(
-                  children: [
-                    possibleSimilarDiscoveriesCard(
+            Container(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                itemCount: reognized_songs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      possibleSimilarDiscoveriesCard(
                         context,
-                        "assets/images/song_2.jpg",
-                        reognized_songs[1].split(" - ")[0],
-                        reognized_songs[1].split(" - ")[1].split(".")[0],
-                        "https://youtu.be/ng74uaBTC4s"),
-                    const SizedBox(height: 34),
-                  ],
-                );
-              }),
+                        reognized_songs[index + 1]['cover_image'],
+                        reognized_songs[index + 1]['mname'],
+                        reognized_songs[index + 1]['artist_name'], reognized_songs[index + 1]['playback_url']
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
           ],
         ),

@@ -41,7 +41,7 @@ class HistoryViewPage extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 10),
                     child: possibleSimilarDiscoveriesCard(
                       context,
-                      userHistory[index][2], //cover
+                      userHistory[index][''], //cover
                       userHistory[index][0], //title
                       userHistory[index][1], //artist
                       userHistory[index][3], //playbackurl

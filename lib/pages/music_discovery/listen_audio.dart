@@ -34,7 +34,7 @@ class _ListenMusicPageState extends State<ListenMusicPage>
   final String audioFilename = randomString();
   bool isRecording = false;
 
-  final String root_url = "http://192.168.65.244:8000/";
+  final String root_url = "https://advanced-sheepdog-awaited.ngrok-free.app/";
 
   TextEditingController editingController = TextEditingController();
   late AnimationController _controller;
@@ -56,7 +56,7 @@ class _ListenMusicPageState extends State<ListenMusicPage>
       String? user_id = FirebaseAuth.instance.currentUser?.uid;
       final response = await http.post(
         Uri.parse(url),
-        body: json.encode({'search_text': textToSend}),
+        body: json.encode({'search_text': textToSend, 'user_id': user_id}),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -74,12 +74,14 @@ class _ListenMusicPageState extends State<ListenMusicPage>
   }
 
   void uploadFile() async {
+    final String api_url = "${root_url}audio/identify";
+    print("\n\n\n\n\n\n\n\n@@@@@API URL IS: ${api_url}");
     final directory = await getApplicationDocumentsDirectory();
     File file = File('${directory.path}/$audioFilename.m4a');
     String? user_id = FirebaseAuth.instance.currentUser?.uid;
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('${root_url} + audio/identify/'),
+      Uri.parse(api_url),
     );
 
     request.fields['user_id'] = user_id!;
@@ -94,6 +96,8 @@ class _ListenMusicPageState extends State<ListenMusicPage>
     try {
       var response = await request.send();
       var responseData = await response.stream.bytesToString();
+
+      print("\n\n\n@@@ RESPONSE IS: ${json.decode(responseData)}");
 
       List<dynamic> songs = json.decode(responseData)['songs'];
       Get.to(DiscoveredMusicViewPage(songs: songs));
@@ -117,7 +121,7 @@ class _ListenMusicPageState extends State<ListenMusicPage>
   }
 
   Future<void> fetchUserHistory(String userId) async {
-    final url = 'http://your_fastapi_server_url/view_history/';
+    final url = '${root_url}view_history/';
 
     try {
       final response = await http.post(
@@ -128,10 +132,11 @@ class _ListenMusicPageState extends State<ListenMusicPage>
 
       final responseData = jsonDecode(response.body);
 
-      final List<dynamic> fetchedSongs = responseData['songs'];
-
-      // Do something with the fetched songs, if needed
-      print('Fetched Songs: $fetchedSongs');
+      List<dynamic> fetchedSongs = [];
+      if(responseData != null){
+        fetchedSongs = responseData['songs'];
+      }
+      Get.to(()=>HistoryViewPage(userHistory: fetchedSongs));
     } catch (e) {
       print('Exception: $e');
     }
@@ -148,156 +153,165 @@ class _ListenMusicPageState extends State<ListenMusicPage>
         decoration: BoxDecoration(),
         child: Padding(
           padding: EdgeInsets.all(16.0),
-          child: Column(
+          child: ListView(
             children: [
               Row(
                 children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                FirebaseAuth.instance.currentUser!.photoURL!))),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        "Hi!, ",
-                        style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                fontSize: 23, fontWeight: FontWeight.w700)),
+                  Expanded(
+                      flex: 4,
+                      child: Row(
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                "Hi!, ",
+                                style: GoogleFonts.lato(
+                                    textStyle: TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700)),
+                              )),
+                          Text(
+                            "${FirebaseAuth.instance.currentUser!.displayName?.substring(0, 10)!}",
+                            style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                    fontSize: 23, fontWeight: FontWeight.w400)),
+                          )
+                        ],
                       )),
-                  Text(
-                    "${FirebaseAuth.instance.currentUser!.displayName?.substring(0, 10)!}",
-                    style: GoogleFonts.lato(
-                        textStyle: TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.w400)),
+                  Expanded(
+                      flex: 1,
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        child: ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.logout,
+                            color: Colors.brown,
+                            size: 17,
+                          ),
+                          label: Text(""),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromRGBO(220, 225, 223, 1)),
+                            elevation: MaterialStateProperty.all(0),
+                          ),
+                        ),
+                      ))
+                ],
+              ),
+
+              SizedBox(height: 50,),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () => fetchUserHistory(
+                        FirebaseAuth.instance.currentUser!.uid),
+                    icon: Icon(
+                      Icons.queue_music_outlined,
+                      color: Colors.black,
+                    ),
+                    label: Text(
+                      "Library",
+                      style: GoogleFonts.ubuntu(
+                          textStyle: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black)),
+                    ),
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(0),
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromRGBO(230, 235, 233, 1))),
+                  ),
+                  SizedBox(height: 100),
+                  AnimatedBuilder(
+                      animation: _controller,
+                      builder: (context, child) {
+                        return Container(
+                          width: 200 +
+                              _controller.value * (!isRecording ? 5.0 : 30.0),
+                          height: 200 +
+                              _controller.value * (!isRecording ? 5.0 : 30.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color.fromRGBO(20, 18, 18, 1)),
+                                elevation: MaterialStateProperty.all(0.0),
+                              ),
+                              onPressed: toggleRecording,
+                              child: isRecording
+                                  ? Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                              "assets/icons/microphone.png"),
+                                          width: 60 +
+                                              _controller.value *
+                                                  (!isRecording ? 5.0 : 15.0),
+                                          height: 60 +
+                                              _controller.value *
+                                                  (!isRecording ? 5.0 : 15.0),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          "Tap to stop",
+                                          style: GoogleFonts.lato(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white
+                                                      .withOpacity(1),
+                                                  fontSize: 15 +
+                                                      _controller.value * 5.0,
+                                                  fontWeight: FontWeight.w300)),
+                                        )
+                                      ],
+                                    )
+                                  : Image(
+                                      image: AssetImage(
+                                          "assets/icons/microphone.png"),
+                                      width: 96 +
+                                          _controller.value *
+                                              (!isRecording ? 5.0 : 30.0),
+                                      height: 96 +
+                                          _controller.value *
+                                              (!isRecording ? 5.0 : 30.0),
+                                    )),
+                        );
+                      }),
+                  SizedBox(
+                    height: 70,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    height: 55,
+                    child: TextFormField(
+                      style: GoogleFonts.ubuntu(
+                          textStyle: TextStyle(color: Colors.black)),
+                      controller: editingController,
+                      decoration: InputDecoration(
+                          hintText: "Search with lyrics instead",
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              searchWithLyrics();
+                            },
+                            child: Icon(Icons.search_outlined),
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.white))),
+                    ),
                   ),
                 ],
               ),
-              SizedBox(
-                height: 80,
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.7,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AnimatedBuilder(
-                        animation: _controller,
-                        builder: (context, child) {
-                          return Container(
-                            width: 200 +
-                                _controller.value * (!isRecording ? 5.0 : 30.0),
-                            height: 200 +
-                                _controller.value * (!isRecording ? 5.0 : 30.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            child: ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Color.fromRGBO(20, 18, 18, 1)),
-                                  elevation: MaterialStateProperty.all(0.0),
-                                ),
-                                onPressed: toggleRecording,
-                                child: isRecording
-                                    ? Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image(
-                                            image: AssetImage(
-                                                "assets/icons/microphone.png"),
-                                            width: 60 +
-                                                _controller.value *
-                                                    (!isRecording ? 5.0 : 15.0),
-                                            height: 60 +
-                                                _controller.value *
-                                                    (!isRecording ? 5.0 : 15.0),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "Tap to stop",
-                                            style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    color: Colors.white
-                                                        .withOpacity(1),
-                                                    fontSize: 15 +
-                                                        _controller.value * 5.0,
-                                                    fontWeight:
-                                                        FontWeight.w300)),
-                                          )
-                                        ],
-                                      )
-                                    : Image(
-                                        image: AssetImage(
-                                            "assets/icons/microphone.png"),
-                                        width: 96 +
-                                            _controller.value *
-                                                (!isRecording ? 5.0 : 30.0),
-                                        height: 96 +
-                                            _controller.value *
-                                                (!isRecording ? 5.0 : 30.0),
-                                      )),
-                          );
-                        }),
-                    SizedBox(
-                      height: 100,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.85,
-                      height: 55,
-                      child: TextFormField(
-                        style: GoogleFonts.ubuntu(
-                            textStyle: TextStyle(color: Colors.black)),
-                        controller: editingController,
-                        decoration: InputDecoration(
-                            hintText: "Search with lyrics instead",
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                searchWithLyrics();
-                              },
-                              child: Icon(Icons.search_outlined),
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: Colors.white))),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 100,
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: () => fetchUserHistory('4'),
-                      icon: Icon(
-                        Icons.queue_music_outlined,
-                        color: Colors.black,
-                      ),
-                      label: Text(
-                        "Library",
-                        style: GoogleFonts.ubuntu(
-                            textStyle: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black)),
-                      ),
-                      style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromRGBO(230, 235, 233, 1))),
-                    )
-                  ],
-                ),
-              )
             ],
           ),
         ),
