@@ -9,6 +9,8 @@ Widget possibleSimilarDiscoveriesCard(BuildContext context, String imgPath,
   double contentWidth = displayWidth * 0.85;
   double contentHeight = 95.0;
 
+
+
   return Padding(
     padding: const EdgeInsets.fromLTRB(43, 0, 0, 0),
     child: Container(
@@ -23,7 +25,7 @@ Widget possibleSimilarDiscoveriesCard(BuildContext context, String imgPath,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               image: DecorationImage(
-                  image: AssetImage(imgPath), fit: BoxFit.cover),
+                  image: NetworkImage(imgPath), fit: BoxFit.cover),
             ),
           ),
           Padding(

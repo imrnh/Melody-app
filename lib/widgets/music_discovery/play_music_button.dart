@@ -45,13 +45,20 @@ Widget miniPlaySongButton(BuildContext context, String playUrl){
 
   var displayWidth = MediaQuery.of(context).size.width;
 
-
   final Uri _url = Uri.parse(playUrl);
 
   Future<void> _launchUrl() async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+    try{
+      if (await canLaunchUrl(_url)) {
+        await launchUrl(_url);
+      } else {
+        throw 'Could not launch $_url';
+      }
     }
+    catch(e){
+      print("Exception: ________ $e");
+    }
+
   }
 
   return Center(

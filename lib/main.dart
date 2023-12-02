@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       if (user == null) {
         print('@MESSAGE ___ User is currently signed out!');
       } else {
-        print('@MESSAGE ___ User is signed in! ${user.displayName}');
+        print('@MESSAGE ___ User is signed in! ${user.uid}');
       }
     });
     return GetMaterialApp(
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: "/discover", //ChatPage(myUID: "2343", frUID: "4009viodsf"),
       // getPages: pageMapping(),
-      home: AuthScreen(),
+      home: FirebaseAuth.instance.currentUser != null ? ListenMusicPage() : AuthScreen(),
     );
   }
 }
